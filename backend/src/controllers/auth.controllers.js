@@ -46,6 +46,9 @@ resp.cookie("token" , token, {
 newUser.password = undefined;
 resp.json({success : true , user: newUser})
 
+console.log("Decoded token:", decoded);
+console.log("req.user:", req.user);
+
 
     } catch (error) {
         console.error("Error in register controller" , error)
@@ -90,3 +93,16 @@ export const login = async(req, resp)=> {
     }
 }
 
+export async function logout(req,resp){
+    resp.clearCookie("token" , {
+        httpOnly : true,
+        sameSite : "strict",
+        secure : process.env.NODE_ENV ==='production'
+    })
+    resp.status(200).json({success: true , message: "Logout successfully"})
+}
+
+export const getMe = async (req ,resp) => {//This allows frontend to check if user is logged in.
+    const user = await User.findById(req.user).select("-password");
+    resp.json(user);
+}

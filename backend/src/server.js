@@ -12,7 +12,10 @@ connectDB();
 const app = express();
 
 
-app.use(cors());
+app.use(cors({
+    origin : "http://localhost:5173",  // React dev server  //Without credentials: true, cookies will NOT be sent from frontend.
+    credentials: true
+}));
 app.use(express.json());
 app.use(cookieparser());
 app.use("/api/auth" , authRoutes)
