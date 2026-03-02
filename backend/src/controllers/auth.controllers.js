@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import  jwt  from "jsonwebtoken";
 import User from "../model/User.js";
+import { useState } from "react";
 
 export const register = async (req , resp) =>{
     const {fullName , email , password , phoneNumber} = req.body;
@@ -106,3 +107,5 @@ export const getMe = async (req ,resp) => {//This allows frontend to check if us
     const user = await User.findById(req.user).select("-password");
     resp.json(user);
 }
+ 
+

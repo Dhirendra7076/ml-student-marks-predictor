@@ -3,6 +3,7 @@ import { useState } from 'react'
 import PredictorForm from './components/PredictorForm.jsx'
 import { Routes,Route } from 'react-router-dom'
 import { Home } from 'lucide-react'
+import HistoryPage from './pages/history.jsx'
 
 function App() {
   
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path = "/" element = {<PredictorForm/>}/>
         <Route path = "/home" element = {<Home/>}/>
+        <Route path = "/history" element = {<HistoryPage/>}/>
       </Routes>
     </div>
     )
