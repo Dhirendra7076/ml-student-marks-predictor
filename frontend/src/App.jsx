@@ -6,6 +6,7 @@ import { Home } from 'lucide-react'
 import HistoryPage from './pages/history.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import Login from './pages/Login.jsx'
+import Register from './pages/register.jsx'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           
          }/>
         <Route path = "/login" element = {<Login/>}/>
+        <Route path = '/register' element = {<Register/>}/>
       </Routes>
     </div>
     )

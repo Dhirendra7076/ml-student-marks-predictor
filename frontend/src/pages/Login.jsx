@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 //import { login } from "../../../backend/src/controllers/auth.controllers";
 import { LogIn } from "lucide-react";
+import { Link } from "react-router-dom";
 
 
 function Login(){
@@ -70,6 +71,12 @@ function Login(){
             </button>
 
           </form>
+          <p className="text-center mt-4 text-sm">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-primary font-semibold">
+             Register
+               </Link>
+            </p>
 
         </div>
       </div>
