@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import { connectDB } from './config/db.js';
 import cookieparser from 'cookie-parser'
 import authRoutes from './routes/auth.routes.js';
+import mongoose from 'mongoose';
 
 dotenv.config();
 connectDB();
@@ -21,7 +22,7 @@ app.use(cookieparser());
 app.use("/api/auth" , authRoutes)
 
 const PORT = process.env.PORT ||5000
-
+await mongoose.connect(process.env.MONGO_URI)
 
 //routes
 app.use("/api" , predictRoutes)
