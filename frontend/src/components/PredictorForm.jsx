@@ -69,9 +69,7 @@ function PredictorForm() {
       Student Marks Predictor
     </h2>
 
-    <Link to = '/history' className="btn btn-outline btn-sm mt-4">
-    View History
-    </Link>
+   
 
     <form onSubmit={handlePredict} className="space-y-4 mt-4">
       <input

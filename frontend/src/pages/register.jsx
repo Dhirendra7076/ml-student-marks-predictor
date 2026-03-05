@@ -34,7 +34,7 @@ function Register() {
 
             if(countryCode.length<1) {
                 toast.error("Enter Country code")
-                setLoading(false)                   //TO DO - MAKE IT SO THAT USER CAN'T EVEN TYPE MORE THAN 2. 10 DIGITS
+                setLoading(false)                   //TO DO - MAKE IT SO THAT USER CAN'T EVEN TYPE MORE THAN 2, 10 DIGITS
                 return;
             }
             if(phoneNumber.length!==10){
