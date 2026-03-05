@@ -11,6 +11,7 @@ function Login(){
     const [email , setEmail] = useState("")
     const [password , setPassword] = useState("")
     const [loading , setLoading] = useState(false);
+    const [showPassword , setShowPassword] = useState("")
 
     const navigate = useNavigate()
 
@@ -34,8 +35,8 @@ function Login(){
     }
 
     return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
-      <div className="card w-full max-w-md bg-base-100 shadow-xl">
+    <div className=" max-h-screen flex items-center justify-center bg-base-200">
+      <div className="card w-full max-w-screen-sm bg-base-100 shadow-xl">
         <div className="card-body">
 
           <h2 className="card-title justify-center text-2xl">
@@ -54,14 +55,23 @@ function Login(){
               required
             />
 
-            <input
-              type="password"
-              placeholder="Password"
-              className="input input-bordered w-full"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <div className="relative">
+  <input
+    type={showPassword ? "text" : "password"}
+    className="input input-bordered w-full pr-10"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    required
+  />
+
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    className="absolute right-3 top-3 text-gray-400"
+  >
+    {showPassword ? "Hide" : "Show"}
+  </button>
+</div>
 
             <button
               type="submit"

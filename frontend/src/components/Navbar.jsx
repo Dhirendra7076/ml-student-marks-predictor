@@ -5,14 +5,24 @@ import {  User , History , LogOut } from "lucide-react";
 
 function Navbar(){
     const [user , setUser] = useState(null)
+    const [loading , setLoading] = useState(false)
     const navigate = useNavigate();
 
     useEffect(()=>{
         axios.get("http://localhost:5000/api/auth/me" , {
             withCredentials : true
         })
-        .then((res)=> setUser(res.data))
-        .catch(()=> setUser(null));
+        .then((res)=> {setUser(res.data)
+            setLoading(false)
+    })
+        .catch((err)=>{
+            if(err.response?.status ===401){
+                setUser(null)
+                setLoading(false)
+            }else {
+                console.error(err)
+            }
+        });
     },[])
 
     const handleLogout = async()=> {

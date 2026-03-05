@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import  { toast } from 'react-hot-toast'
-import { useNavigate } from "react-router";
-import { UserPlus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { UserPlus , EyeIcon , EyeClosedIcon} from "lucide-react";
 import { Link } from "react-router-dom";
 
 
@@ -10,9 +10,10 @@ function Register() {
     const [fullName , setFullName] = useState("")
     const [email , setEmail] = useState("")
     const [countryCode , setCountryCode] = useState("")
-    const [phoneNumber , setPhoneNumber] = useState()
+    const [phoneNumber , setPhoneNumber] = useState("")
     const [password , setPassword] = useState("")
     const [loading , setLoading] = useState(false);
+    const [showPassword , setShowPassword] = useState(false);
 
     const navigate = useNavigate();
 
@@ -20,19 +21,7 @@ function Register() {
         e.preventDefault();
         setLoading(true)
 
-        try {
-            await axios.post("http://localhost:5000/api/auth/register", 
-                {fullName,
-                    email,
-                    password,
-                    phoneNumber: `+${countryCode}  ${phoneNumber}`,
-                   
-
-                },
-                {withCredentials : true}
-            )
-
-            if(countryCode.length<1) {
+        if(countryCode.length<1) {
                 toast.error("Enter Country code")
                 setLoading(false)                   //TO DO - MAKE IT SO THAT USER CAN'T EVEN TYPE MORE THAN 2, 10 DIGITS
                 return;
@@ -40,15 +29,29 @@ function Register() {
             if(phoneNumber.length!==10){
                 toast.error("Phone number must be of 10 digits")
             }
+
+        try {
+            await axios.post("http://localhost:5000/api/auth/register", 
+                {fullName,
+                    email,
+                    password,
+                    phoneNumber: `+${countryCode}${phoneNumber}`,
+                   
+
+                },
+                {withCredentials : true}
+            )
+
+            
             toast.success("Registration Successful!")
             navigate("/")
         } catch (error) {
-            toast.error(error.reponse?.data?.message || "Registration Failed")
+            toast.error(error.response?.data?.message || "Registration Failed")
         }
         setLoading(false)
     }
  return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
+    <div className="flex items-center justify-center w-full">
       <div className="card w-full max-w-md bg-base-100 shadow-xl">
         <div className="card-body">
 
@@ -109,14 +112,23 @@ function Register() {
 
 </div>
 
-            <input
-              type="password"
-              placeholder="Password"
-              className="input input-bordered w-full"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+           <div className="relative">
+            <input 
+            type = {showPassword? "text" : "password"}
+            className="input input-bordered w-full pr-10"
+            value={password}
+            onChange={(e)=> setPassword(e.target.value)}
+            required
             />
+
+            <button
+            type="button"
+            onClick={()=>setShowPassword(!showPassword)}
+            className="absolute right-3 top-3 text-gray-400"
+            >
+              {showPassword? <EyeIcon size = {12}/> : <EyeClosedIcon size={12}/>}
+            </button>
+           </div>
 
             <button
               type="submit"
