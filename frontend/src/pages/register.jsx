@@ -4,6 +4,7 @@ import  { toast } from 'react-hot-toast'
 import { useNavigate } from "react-router-dom";
 import { UserPlus , EyeIcon , EyeClosedIcon} from "lucide-react";
 import { Link } from "react-router-dom";
+import zxcvbn from 'zxcvbn'
 
 
 function Register() {
@@ -14,11 +15,37 @@ function Register() {
     const [password , setPassword] = useState("")
     const [loading , setLoading] = useState(false);
     const [showPassword , setShowPassword] = useState(false);
+    const [passwordStrength , setPasswordStrength]= useState(0);
+    const [errors , setErrors] = useState({})
+
 
     const navigate = useNavigate();
 
+    const validate = ()=>{
+      const newErrors = {}
+
+      if(!fullName.trim()){
+        newErrors.fullName = "Full Name Required"
+
+      }
+      if(!email.includes("@"))
+        newErrors.email = "Invalid email"
+
+      if(phoneNumber.length!==10)
+        newErrors.phoneNumber = "Phone number must be 10 digits"
+
+      if(password.length<8)
+        newErrors.password = "Password must be atleast 8 characters"
+
+      setErrors(newErrors)
+
+      return Object.keys(newErrors).length===0
+    }
+
     const handleRegister = async(e)=> {
         e.preventDefault();
+        if(!validate()) 
+          return ;
         setLoading(true)
 
         if(countryCode.length<1) {
@@ -117,9 +144,32 @@ function Register() {
             type = {showPassword? "text" : "password"}
             className="input input-bordered w-full pr-10"
             value={password}
-            onChange={(e)=> setPassword(e.target.value)}
+            onChange={(e)=> {
+              const value = e.target.value
+              setPassword(value)
+              const result= zxcvbn(value)
+              setPasswordStrength(result.score)
+            }}
             required
             />
+
+            <div className="w-full mt-2">
+  <progress 
+    className={`progress w-full 
+      ${passwordStrength === 0 && "progress-error"}
+      ${passwordStrength === 1 && "progress-error"}
+      ${passwordStrength === 2 && "progress-warning"}
+      ${passwordStrength === 3 && "progress-info"}
+      ${passwordStrength === 4 && "progress-success"}
+    `}
+    value={passwordStrength}
+    max="4"
+  ></progress>
+
+  <p className="text-xs mt-1 text-gray-400">
+    {["Very Weak","Weak","Okay","Strong","Very Strong"][passwordStrength]}
+  </p>
+</div>
 
             <button
             type="button"
