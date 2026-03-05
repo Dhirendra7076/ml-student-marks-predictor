@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 //import { login } from "../../../backend/src/controllers/auth.controllers";
-import { LogIn } from "lucide-react";
+import { EyeClosed, EyeIcon, LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
 
 
@@ -35,21 +35,23 @@ function Login(){
     }
 
     return (
-    <div className=" max-h-screen flex items-center justify-center bg-base-200">
-      <div className="card w-full max-w-screen-sm bg-base-100 shadow-xl">
+    <div className="w-full max-w-lg backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl rounded-2xl p-8">
+      <div className="card w-full max-w-lg  bg-base-100 shadow-xl p-8">
         <div className="card-body">
 
-          <h2 className="card-title justify-center text-2xl">
-            <LogIn className="mr-2" />
-            Login
-          </h2>
+          <div className="flex items-center justify-center gap-2 mb-6">
+   <LogIn size={26} className="text-primary"/>
+  <h2 className="text-2xl font-semibold tracking-wide">
+    Login
+  </h2>
+</div>
 
           <form onSubmit={handleLogin} className="space-y-4 mt-4">
 
             <input
               type="email"
               placeholder="Email"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full bg-base-200/40 focus:outline-none focus:ring-2 focus:ring-primary transition-all"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -58,7 +60,8 @@ function Login(){
             <div className="relative">
   <input
     type={showPassword ? "text" : "password"}
-    className="input input-bordered w-full pr-10"
+    className="input input-bordered w-full pr-10 bg-base-200/40 focus:ring-2 focus:ring-primary transition-all"
+    placeholder="Password"
     value={password}
     onChange={(e) => setPassword(e.target.value)}
     required
@@ -67,23 +70,25 @@ function Login(){
   <button
     type="button"
     onClick={() => setShowPassword(!showPassword)}
-    className="absolute right-3 top-3 text-gray-400"
+    className="absolute right-3 top-3 text-gray-400 hover:text-white transition"
   >
-    {showPassword ? "Hide" : "Show"}
+    {showPassword ? <EyeIcon size={12}/> : <EyeClosed size={12}/>}
   </button>
 </div>
 
             <button
-              type="submit"
-              className={`btn btn-primary w-full ${loading ? "loading" : ""}`}
-            >
-              {loading ? "Logging in..." : "Login"}
-            </button>
+  type="submit"
+  className={`btn w-full mt-2 bg-gradient-to-r from-indigo-500 to-purple-500 border-none text-white hover:opacity-90 transition ${
+    loading ? "loading" : ""
+  }`}
+>
+  {loading ? "Logging in..." : "Login"}
+</button>
 
           </form>
-          <p className="text-center mt-4 text-sm">
+          <p className="text-center mt-5 text-sm text-gray-400">
             Don't have an account?{" "}
-            <Link to="/register" className="text-primary font-semibold">
+            <Link to="/register" className="text-primary font-semibold hover:underline">
              Register
                </Link>
             </p>
