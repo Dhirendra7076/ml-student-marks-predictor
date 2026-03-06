@@ -121,7 +121,7 @@ function PredictorForm() {
         required
       />
 
-      <PredictionChart data={chartData}/>
+      
       <input 
       type = "number"
       min="0"
@@ -193,6 +193,9 @@ function PredictorForm() {
         {loading ? "Predicting..." : "Predict Marks"}
       </button>
     </form>
+
+
+    <PredictionChart data={chartData}/>
 
     {result !== null && (
       <div className="alert alert-success mt-4">

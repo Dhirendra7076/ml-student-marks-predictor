@@ -11,7 +11,7 @@ function Login(){
     const [email , setEmail] = useState("")
     const [password , setPassword] = useState("")
     const [loading , setLoading] = useState(false);
-    const [showPassword , setShowPassword] = useState("")
+    const [showPassword , setShowPassword] = useState(false)
 
     const {setUser} = useAuth()
 
@@ -39,8 +39,12 @@ function Login(){
     }
 
     return (
-    <div className="w-full max-w-lg backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl rounded-2xl p-8">
-      <div className="card w-full max-w-lg  bg-base-100 shadow-xl p-8">
+      
+<div className="min-h-[80vh] w-full flex items-center justify-center">
+
+  <div className="w-full max-w-lg backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl rounded-2xl p-8">
+    
+      
         <div className="card-body">
 
           <div className="flex items-center justify-center gap-2 mb-6">
