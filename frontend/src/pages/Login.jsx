@@ -5,13 +5,15 @@ import toast from "react-hot-toast";
 //import { login } from "../../../backend/src/controllers/auth.controllers";
 import { EyeClosed, EyeIcon, LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import { useAuth } from "../context/AuthContent";
 
 function Login(){
     const [email , setEmail] = useState("")
     const [password , setPassword] = useState("")
     const [loading , setLoading] = useState(false);
     const [showPassword , setShowPassword] = useState("")
+
+    const {setUser} = useAuth()
 
     const navigate = useNavigate()
 
@@ -20,10 +22,12 @@ function Login(){
         setLoading(true)
 
         try {
-            await axios.post("http://localhost:5000/api/auth/login" , 
+           const res = await axios.post("http://localhost:5000/api/auth/login" , 
                 {email , password},
                 {withCredentials : true}
             )
+            
+            setUser(res.data.user)
 
             toast.success("Login Successful")
             navigate('/')

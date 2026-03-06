@@ -78,8 +78,8 @@ function Register() {
         setLoading(false)
     }
  return (
-    <div className="flex items-center justify-center w-full">
-      <div className="card w-full max-w-md bg-base-100 shadow-xl">
+    <div className="flex items-center justify-center min-h-[85vh] px-4">
+      <div className="w-full max-w-lg backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl rounded-2xl p-8">
         <div className="card-body">
 
           <h2 className="card-title justify-center text-2xl">
@@ -110,32 +110,33 @@ function Register() {
             <div className="flex gap-2">
 
   {/* Country Code */}
+  <div className="flex gap-3">
+
   <input
     type="text"
-    placeholder="Code"
+    placeholder="+91"
     className="input input-bordered w-24"
     value={countryCode}
     maxLength={4}
-    onChange={(e) => {
-      const value = e.target.value.replace(/\D/g, "");
+    onChange={(e)=>{
+      const value = e.target.value.replace(/\D/g,"");
       setCountryCode(value);
     }}
-    required
   />
 
-  {/* Phone Number */}
   <input
     type="text"
-    placeholder="Phone Number"
+    placeholder="Phone number"
     className="input input-bordered flex-1"
     value={phoneNumber}
     maxLength={10}
-    onChange={(e) => {
-      const value = e.target.value.replace(/\D/g, "");
+    onChange={(e)=>{
+      const value = e.target.value.replace(/\D/g,"");
       setPhoneNumber(value);
     }}
-    required
   />
+
+</div>  
 
 </div>
 
@@ -143,10 +144,12 @@ function Register() {
             <input 
             type = {showPassword? "text" : "password"}
             className="input input-bordered w-full pr-10"
+            placeholder="Password"
             value={password}
             onChange={(e)=> {
               const value = e.target.value
               setPassword(value)
+
               const result= zxcvbn(value)
               setPasswordStrength(result.score)
             }}

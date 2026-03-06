@@ -103,9 +103,20 @@ export async function logout(req,resp){
     resp.status(200).json({success: true , message: "Logout successfully"})
 }
 
-export const getMe = async (req ,resp) => {//This allows frontend to check if user is logged in.
-    const user = await User.findById(req.user).select("-password");
-    resp.json(user);
+export const getMe = async (req, res) => {
+  try {
+
+    if (!req.user) {
+      return res.json(null)
+    }
+
+    const user = await User.findById(req.user).select("-password")
+
+    res.json(user)
+
+  } catch (error) {
+    console.error("GetMe error:", error)
+    res.status(500).json({ message: "Server error" })
+  }
 }
- 
 

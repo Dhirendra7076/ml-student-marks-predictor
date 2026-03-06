@@ -2,16 +2,18 @@ import jwt from 'jsonwebtoken'
 
 
 export const protect  = async (req ,resp , next) => {
-    const token = req.cookies.token;
+    const token = req.cookies.jwt;
 
     if(!token)  {
-        return resp.status(400).json({message : "Unauthorized"})
+       req.user = null
+        return next();
     }
     try {
         const decoded  = jwt.verify(token , process.env.JWT_SECRET_KEY);
         req.user = decoded.id;  //attach user id to request
         next();
     } catch (error) {
-        return resp.status(401).json({message : "Invalid token"})
+       req.user = null
+       next();
     }
 }

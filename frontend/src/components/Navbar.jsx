@@ -2,37 +2,36 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate , Link } from "react-router-dom";
 import {  User , History , LogOut } from "lucide-react";
+import { useAuth } from "../context/AuthContent";
 
 function Navbar(){
-    const [user , setUser] = useState(null)
     const [loading , setLoading] = useState(false)
     const navigate = useNavigate();
+    const {user, logout} = useAuth()
 
-    useEffect(()=>{
-        axios.get("http://localhost:5000/api/auth/me" , {
-            withCredentials : true
-        })
-        .then((res)=> {setUser(res.data)
-            setLoading(false)
-    })
-        .catch((err)=>{
-            if(err.response?.status ===401){
-                setUser(null)
-                setLoading(false)
-            }else {
-                console.error(err)
-            }
-        });
-    },[])
+    // useEffect(()=>{
+    //     axios.get("http://localhost:5000/api/auth/me" , {
+    //         withCredentials : true
+    //     })
+    //     .then((res)=> {setUser(res.data)
+    //         setLoading(false)
+    // })
+    //     .catch((err)=>{
+    //         if(err.response?.status ===401){
+    //             setUser(null)
+    //             setLoading(false)
+    //         }else {
+    //             console.error(err)
+    //         }
+    //     });
+    // },[])
 
     const handleLogout = async()=> {
-        await axios.post("http://localhost:5000/api/auth/logout",{},{
-            withCredentials: true
-        });
-
-        setUser(null)
+        await logout()
         navigate('/login')
     }
+
+    console.log("Navbar rendered")
 
     return (
     <div className="navbar bg-base-100 shadow-md px-6">
