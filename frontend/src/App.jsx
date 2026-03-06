@@ -5,9 +5,21 @@ import HistoryPage from './pages/history.jsx'
 import Login from './pages/Login.jsx'
 import Register from './pages/register.jsx'
 import Navbar from './components/Navbar.jsx'
+import { useAuth } from './context/AuthContent.jsx'
 
 
 function App() {
+
+     const {loading} = useAuth()
+
+     if(loading) 
+          return (
+               <div className='min-h-screen flex items-center justify-center'>
+                    <span className='loading loading-spinner loading-lg'>
+                         
+                    </span>
+               </div>
+          )
   
   return (
      <div className='absolute inset-0 -z-10 
@@ -17,16 +29,10 @@ function App() {
 
      <main className='flex-1 flex items-center justify-center relative'>
       <Routes>
-        <Route path = "/" element = {
-          
-             <PredictorForm/>
+        <Route path = "/" element = {<PredictorForm/>
         }/>
         <Route path = "/home" element = {<Home/>}/>
-        <Route path = "/history" element = {
-          
-             <HistoryPage/>
-          
-         }/>
+        <Route path = "/history" element = {<HistoryPage/>}/>
         <Route path = "/login" element = {<Login/>}/>
         <Route path = '/register' element = {<Register/>}/>
       </Routes>
