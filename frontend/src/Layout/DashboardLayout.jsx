@@ -13,7 +13,7 @@ function DashboardLayout() {
 
         <Sidebar/>
 
-        <main className="flex-1 p-8">
+        <main className="flex-1 p-10 max-w-6xl mx-auto w-full">
           <Outlet/> 
         </main>
 

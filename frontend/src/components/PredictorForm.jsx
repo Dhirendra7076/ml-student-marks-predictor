@@ -3,6 +3,7 @@ import axios from "axios";
 import { BarChart } from "lucide-react";
 import toast from 'react-hot-toast'
 import { Link } from "react-router-dom";
+import PredictionChart from "./PredictionCharts";
 
 
 
@@ -18,6 +19,15 @@ function PredictorForm() {
         return saved ? JSON.parse(saved): [];
     })
     const [result , setResult] = useState(null)
+
+    const chartData = [
+      {studyHours : 1 , marks : 40},
+      {studyHours : 2 , marks : 48},
+      {studyHours : 3 , marks : 55},
+      {studyHours :4 , marks : 63},
+      {studyHours : 5 , marks : 72},
+      {studyHours : 6 , marks : 80}
+    ]
 
     useEffect(()=> {
         localStorage.setItem("predictionHistory" , JSON.stringify(history));
@@ -69,7 +79,24 @@ function PredictorForm() {
       Student Marks Predictor
     </h2>
 
-   
+   <div className="grid grid-cols-3 gap-6 mb-8">
+
+  <div className="card bg-base-200 shadow-md p-4">
+    <h2 className="text-sm opacity-70">Total Predictions</h2>
+    <p className="text-2xl font-bold">42</p>
+  </div>
+
+  <div className="card bg-base-200 shadow-md p-4">
+    <h2 className="text-sm opacity-70">Average Marks</h2>
+    <p className="text-2xl font-bold">78</p>
+  </div>
+
+  <div className="card bg-base-200 shadow-md p-4">
+    <h2 className="text-sm opacity-70">Best Prediction</h2>
+    <p className="text-2xl font-bold">92</p>
+  </div>
+
+</div>
 
     <form onSubmit={handlePredict} className="space-y-4 mt-4">
       <input
@@ -93,6 +120,8 @@ function PredictorForm() {
         }
         required
       />
+
+      <PredictionChart data={chartData}/>
       <input 
       type = "number"
       min="0"
