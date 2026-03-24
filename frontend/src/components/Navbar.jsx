@@ -1,10 +1,10 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+
+import {  useState } from "react";
 import { useNavigate , Link } from "react-router-dom";
-import {  User , History , LogOut } from "lucide-react";
+import { Menu, User ,  LogOut } from "lucide-react";
 import { useAuth } from "../context/AuthContent";
 
-function Navbar(){
+function Navbar({toggleSidebar}){
     const [loading , setLoading] = useState(false)
     const navigate = useNavigate();
     const {user, logout} = useAuth()
@@ -31,32 +31,36 @@ function Navbar(){
         navigate('/login')
     }
 
-    console.log("Navbar rendered")
-
     return (
     <div className="navbar bg-base-100 shadow-md px-6">
-      <div className="flex-1">
-        <Link to="/" className="text-xl font-bold">
+
+      {/* LEFT SIDE */}
+      <div className="flex items-center gap-3 flex-1">
+
+        {/* Hamburger */}
+        <button
+          onClick={toggleSidebar}
+          className="btn btn-ghost btn-sm"
+        >
+          <Menu size={20} />
+        </button>
+
+        {/* Logo */}
+        <Link to="/" className="text-lg font-bold">
           🎓 Marks Predictor
         </Link>
+
       </div>
 
-      <div className="flex gap-4 items-center">
+      {/* RIGHT SIDE */}
+      <div className="flex items-center gap-4">
 
         {user ? (
           <>
-            <span className="flex items-center gap-1 text-sm">
+            <span className="flex items-center gap-2 text-sm opacity-80">
               <User size={16} />
               {user.fullName}
             </span>
-
-            <Link
-              to="/history"
-              className="btn btn-sm btn-outline flex items-center gap-1"
-            >
-              <History size={16} />
-              History
-            </Link>
 
             <button
               onClick={handleLogout}
@@ -78,8 +82,9 @@ function Navbar(){
         )}
 
       </div>
+
     </div>
-  );
+  )
 }
 
 export default Navbar

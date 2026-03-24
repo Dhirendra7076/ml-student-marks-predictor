@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom"
 import { Home, History } from "lucide-react"
+import { useState } from "react"
 
 
 
   function Sidebar() {
+    const [isOpen , setIsOpenN] = useState(true)
   return (
     <div className="w-60 bg-base-200 border-r border-base-300 p-4">
 

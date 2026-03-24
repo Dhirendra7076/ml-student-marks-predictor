@@ -1,24 +1,25 @@
-import { Outlet } from "react-router-dom" //<!THIS MEANS WHERE pages will render/>
+import { useState } from "react"
 import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar"
+import { Outlet } from "react-router-dom"
 
 function DashboardLayout() {
+  const [isOpen, setIsOpen] = useState(true)
 
   return (
     <div className="min-h-screen flex flex-col">
 
-      <Navbar/>
+      <Navbar toggleSidebar={() => setIsOpen(!isOpen)} />
 
       <div className="flex flex-1">
 
-        <Sidebar/>
+        <Sidebar isOpen={isOpen} />
 
-        <main className="flex-1 p-10 max-w-6xl mx-auto w-full">
-          <Outlet/> 
+        <main className="flex-1 p-6 transition-all duration-300">
+          <Outlet/>
         </main>
 
       </div>
-
     </div>
   )
 }
