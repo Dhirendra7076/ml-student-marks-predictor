@@ -57,8 +57,9 @@ function Register() {
                 toast.error("Phone number must be of 10 digits")
             }
 
-            const API = import.meta.env.VITE_API_URL;
+            
         try {
+            const API = import.meta.env.VITE_API_URL;
             await axios.post(`${API}/api/auth/register`, 
                 {fullName,
                     email,

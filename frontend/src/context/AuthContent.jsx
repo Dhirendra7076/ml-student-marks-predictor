@@ -10,8 +10,11 @@ export const AuthProvider =({children})=> {
     const [loading , setLoading] = useState(true)
 
     const checkAuth = async()=> {
+
+        
     try {
-        const res = await axios.get("http://localhost:5000/api/auth/me" , {
+        const API = import.meta.env.VITE_API_URL;
+        const res = await axios.get(`${API}/api/auth/me` , {
             withCredentials: true
         })
 
