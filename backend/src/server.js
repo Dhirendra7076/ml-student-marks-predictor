@@ -14,7 +14,7 @@ const app = express();
 
 
 app.use(cors({
-  origin: "https://your-frontend.vercel.app",
+  origin: "https://ml-student-marks-predictor.vercel.app",
   credentials: true
 }));
 app.use(express.json());
