@@ -5,18 +5,22 @@ import joblib
 import numpy as np
 warnings.filterwarnings("ignore")
 from fastapi.middleware.cors import CORSMiddleware
+import os
 
 app = FastAPI()
 
-app.add_middleware (
-    CORSMiddleware , 
-    allow_origins = ["http://localhost:5173"],  #reason written in notebook (heading cors error)
-    allow_credentials = True,
-    allow_methods = ['*'],
-    allow_headers = ["*"],
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://ml-student-marks-predictor.vercel.app",  #reason written in notebook
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-model = joblib.load("best_model.pkl")
+model_path = os.path.join(os.path.dirname(__file__), "best_model.pkl")
+model = joblib.load(model_path)
 
 # st.title("Student exam score predictor")
 

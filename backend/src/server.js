@@ -13,14 +13,16 @@ connectDB();
 const app = express();
 
 
-const corsOptions = {
-  origin: "https://ml-student-marks-predictor.vercel.app",
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-};
-
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || origin.includes("vercel.app")) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 app.use(cookieparser());
 app.use("/api/auth" , authRoutes)
