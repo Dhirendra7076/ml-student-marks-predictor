@@ -36,9 +36,12 @@ function PredictorForm() {
     const handlePredict = async(e)=> {
         e.preventDefault();
         setLoading(true);
+
+        const ML_API = import.meta.env.VITE_ML_API;
+
     
         try {
-            const res = await axios.post("http://127.0.0.1:8000/predict" , {
+            const res = await axios.post(`${ML_API}/predict`, {
                 study_hours : Number(studyHours),
                 attendance : Number(attendance),
                 mental_health : Number(mentalHealth),
