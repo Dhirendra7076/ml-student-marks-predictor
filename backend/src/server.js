@@ -14,8 +14,8 @@ const app = express();
 
 
 app.use(cors({
-    origin : "http://localhost:5173",  // React dev server  //Without credentials: true, cookies will NOT be sent from frontend.
-    credentials: true
+  origin: "https://your-frontend.vercel.app",
+  credentials: true
 }));
 app.use(express.json());
 app.use(cookieparser());
