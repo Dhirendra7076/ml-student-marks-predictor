@@ -14,9 +14,12 @@ const app = express();
 
 
 app.use(cors({
-  origin: process.env.CLIENT_URL,
-  credentials: true
+  origin: "https://ml-student-marks-predictor.vercel.app",
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+app.options("*", cors());
 app.use(express.json());
 app.use(cookieparser());
 app.use("/api/auth" , authRoutes)
