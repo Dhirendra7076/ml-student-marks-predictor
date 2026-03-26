@@ -37,10 +37,11 @@ function PredictorForm() {
         e.preventDefault();
         setLoading(true);
 
-        const ML_API = import.meta.env.VITE_ML_API;
+        
 
     
         try {
+          const ML_API = import.meta.env.VITE_ML_API;
             const res = await axios.post(`${ML_API}/predict`, {
                 study_hours : Number(studyHours),
                 attendance : Number(attendance),
