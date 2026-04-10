@@ -41,7 +41,7 @@ function PredictorForm() {
 
     
         try {
-          const ML_API = import.meta.env.VITE_ML_API;
+          const ML_API = import.meta.env.VITE_ML_API || "http://localhost:8000";
             const res = await axios.post(`${ML_API}/predict`, {
                 study_hours : Number(studyHours),
                 attendance : Number(attendance),
@@ -52,6 +52,10 @@ function PredictorForm() {
             })
            
             const predictedValue = res.data["Predicted Score"]
+
+            if (predictedValue === undefined) {
+               throw new Error("Invalid response from server: 'Predicted Score' not found.");
+            }
 
             const newEntry = {
                 studyHours : Number(studyHours),
@@ -68,9 +72,11 @@ function PredictorForm() {
 
             toast.success("Prediction Successful!")
         } catch (error) {
-            toast.error("Backend not running!")
+            console.error("Prediction Error:", error);
+            toast.error(error.message || "Backend not running!");
+        } finally {
+            setLoading(false);
         }
-        setLoading(false)
            
     }
 
@@ -201,9 +207,9 @@ function PredictorForm() {
 
     <PredictionChart data={chartData}/>
 
-    {result !== null && (
+    {result !== null && result !== undefined && (
       <div className="alert alert-success mt-4">
-        🎯 Predicted Marks: <strong>{result.toFixed(2)}</strong>
+        🎯 Predicted Marks: <strong>{typeof result === 'number' ? result.toFixed(2) : Number(result).toFixed(2)}</strong>
       </div>
     )}
 

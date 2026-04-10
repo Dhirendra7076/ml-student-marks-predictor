@@ -8,6 +8,7 @@ import Navbar from './components/Navbar.jsx'
 import { useAuth } from './context/AuthContent.jsx'
 import DashboardLayout from './Layout/DashboardLayout.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
+import { Toaster } from 'react-hot-toast'
 
 
 function App() {
@@ -45,7 +46,7 @@ function App() {
        
         </Route>
       </Routes>
-     
+      <Toaster position="top-center" />
      </div>
      </div>
     )
