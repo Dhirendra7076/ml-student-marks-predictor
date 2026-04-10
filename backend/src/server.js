@@ -13,9 +13,19 @@ connectDB();
 const app = express();
 
 
+const allowedOrigins = [
+  "https://ml-student-marks-predictor.vercel.app",
+  "http://localhost:5173",
+  "http://localhost:3000"
+];
+
+if (process.env.CLIENT_URL) {
+  allowedOrigins.push(process.env.CLIENT_URL);
+}
+
 app.use(cors({
   origin: function(origin, callback) {
-    if (!origin || origin.includes("vercel.app")) {
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));

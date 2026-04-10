@@ -81,7 +81,7 @@ function PredictorForm() {
     }
 
     return (
-        <div className="card w-full max-w-md mx-auto bg-base-100/80 backdrop-blur-sm border border-base-content/5 shadow-2xl transition-all duration-300 hover:scale-[1.02]">
+        <div className="card w-full max-w-md mx-auto bg-base-100 shadow-xl transition-all duration-300 hover:scale-105">
   <div className="card-body">
 
     <h2 className="card-title justify-center text-2xl">

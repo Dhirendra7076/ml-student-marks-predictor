@@ -12,7 +12,7 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://ml-student-marks-predictor.vercel.app",  #reason written in notebook
+        os.getenv("CLIENT_URL", "https://ml-student-marks-predictor.vercel.app"),
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "http://localhost:3000"
