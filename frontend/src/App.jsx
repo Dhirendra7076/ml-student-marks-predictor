@@ -25,10 +25,12 @@ function App() {
           )
   
   return (
-     <div className='absolute inset-0 -z-10 
-[background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#00FF9D30_100%)]'>
-     <div className='min-h-screen flex flex-col'>
-     
+     <div className='min-h-screen flex flex-col relative'>
+        {/* Immersive Modern Background */}
+        <div className="fixed inset-0 -z-10">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')] bg-cover bg-center bg-no-repeat opacity-25"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-base-300/80 to-base-100/95"></div>
+        </div>
      
       <Routes>
          <Route path = "/login" element = {<Login/>}/>
@@ -47,7 +49,6 @@ function App() {
         </Route>
       </Routes>
       <Toaster position="top-center" />
-     </div>
      </div>
     )
 }

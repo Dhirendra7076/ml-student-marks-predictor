@@ -32,7 +32,7 @@ function Navbar({toggleSidebar}){
     }
 
     return (
-    <div className="navbar bg-base-100 shadow-md px-6 sticky top-0 z-40">
+    <div className="navbar bg-base-100/70 backdrop-blur-xl border-b border-base-content/10 shadow-lg px-6 sticky top-0 z-40 transition-all duration-300">
 
       {/* LEFT SIDE */}
       <div className="flex items-center gap-3 flex-1">
