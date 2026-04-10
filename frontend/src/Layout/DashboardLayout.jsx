@@ -9,7 +9,7 @@ function DashboardLayout() {
   const toggleSidebar = () => setIsOpen(!isOpen)
 
   return (
-    <div className="min-h-screen flex flex-col overflow-x-hidden">
+    <div className="min-h-screen flex flex-col">
 
       <Navbar toggleSidebar={toggleSidebar} />
 
